@@ -1,7 +1,11 @@
 import os
 from tqdm import tqdm
-import time
 import applescript
+from PIL import Image
+import cv2
+import pytesseract
+import numpy as np
+import pyautogui
 
 YOUTUBE_LINK = 'https://www.youtube.com/channel/UC-uTdkWQ8doqRwXBlkH67Dw'
 LINKEDIN_LINK = 'https://www.linkedin.com/in/jackblair876/'
@@ -31,34 +35,6 @@ if not os.path.exists('screenshots'):
 if not os.path.exists('ocr_results'):
     os.makedirs('ocr_results')
 
-
-# #programmatically call the links in this call
-#capture-website https://www.youtube.com/channel/UC-uTdkWQ8doqRwXBlkH67Dw --output=screenshot.png
-# for link in tqdm(PROFILE_LINKS):
-#     os.system('capture-website ' + link['link'] + ' --output=screenshots/' + link['platform'] + '[' + link['account'] + '].png')
-#     # print('screenshot taken for ' + link['platform'])
-
-
-
-
-# from selenium import webdriver 
-  
-# # create webdriver object 
-# driver = webdriver.Chrome() 
-  
-# # get geeksforgeeks.org 
-# driver.get("https://www.geeksforgeeks.org/") 
-  
-  
-# # get Screenshot 
-# print(driver.get_screenshot_as_file("foo.png")) 
-
-
-
-from PIL import Image
-
-import cv2
-import pytesseract
 
 def convert_youtube_strings_to_values(string):
     # Remove commas if present
@@ -93,6 +69,7 @@ def extract_follower_count(text, platform):
     else:
         print('Platform not supported')
         return None
+   
         
 def ocr_image(image_path, platform):
     global TOTAL_FOLLOWERS
@@ -102,6 +79,7 @@ def ocr_image(image_path, platform):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     # Apply threshold to convert to binary image
     # threshold_img = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)[1]
+    # in my experience, thresholding doesn't work well for OCR
 
     # Pass the image through pytesseract
     text = pytesseract.image_to_string(gray)
@@ -116,52 +94,6 @@ def ocr_image(image_path, platform):
         
     return text
 
-# for link in tqdm(PROFILE_LINKS):
-#     ocr_image('screenshots/' + link['platform'] + '[' + link['account'] + '].png')
-    
-    
-
-    
-
-# from selenium import webdriver
-
-# # 1. create a web driver instance
-# driver = webdriver.Firefox()
-
-# for link in tqdm(PROFILE_LINKS):
-#     driver.get(link['link'])
-    
-#     #wait for 5 seconds
-    
-#     time.sleep(100)
-    
-#     parent = driver.current_window_handle
-#     uselessWindows = driver.window_handles
-#     for winId in uselessWindows:
-#         if winId != parent: 
-#             driver.switch_to.window(winId)
-#             driver.close()
-#     #
-    
-#     driver.save_screenshot('screenshots/' + link['platform'] + '[' + link['account'] + '].png')
-    
-#     # os.system('capture-website ' + link['link'] + ' --output=screenshots/' + link['platform'] + '[' + link['account'] + '].png')
-#     print('screenshot taken for ' + link['platform'])
-
-
-
-# 2. navigate to the website
-# driver.get("https://magician.design/")
-
-# # 3. save a screenshot of the current page
-# driver.save_screenshot("magician.design.png")
-
-# 4. close the web driver
-# driver.quit()
-
-import numpy as np
-import cv2
-import pyautogui
 
 def take_screenshots():
 
@@ -197,27 +129,13 @@ def take_screenshots():
             """)
         
         
-
-# do shell script "screencapture -T 0 " & thePath
-
 def do_ocr():
     for link in tqdm(PROFILE_LINKS):
         ocr_image('screenshots/' + link['platform'] + '[' + link['account'] + '].png', link['platform'])
-        
     
-# set dFolder to "~/Desktop/screencapture/"
-
-# do shell script ("mkdir -p " & dFolder)
-
-# set i to 0
-# repeat 960 times
-# 	do shell script ("screencapture " & dFolder & "frame-" & i & ".png")
-# 	delay 30 -- Wait for 30 seconds.
-# 	set i to i + 1
-# end repeat
 
 if __name__ == '__main__':
     take_screenshots()
     do_ocr()
-    
+
     print('Total followers:', TOTAL_FOLLOWERS)
