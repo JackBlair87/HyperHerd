@@ -7,6 +7,10 @@ import pytesseract
 import numpy as np
 import pyautogui
 
+#====================================================================================================
+# REPLACE THE LINKS BELOW WITH YOUR OWN SOCIAL MEDIA LINKS
+#====================================================================================================
+
 YOUTUBE_LINK = 'https://www.youtube.com/channel/UC-uTdkWQ8doqRwXBlkH67Dw'
 LINKEDIN_LINK = 'https://www.linkedin.com/in/jackblair876/'
 GITHUB_LINK = 'https://github.com/JackBlair87'
@@ -24,6 +28,10 @@ PROFILE_LINKS = [{ 'link' : YOUTUBE_LINK, 'platform' : 'youtube', 'account' : 'm
                  { 'link' : TWITTER_LINK, 'platform' : 'twitter', 'account' : 'main' },
                  { 'link' : MEDIUM_LINK, 'platform' : 'medium', 'account' : 'main' },
                  { 'link' : FACEBOOK_LINK, 'platform' : 'facebook', 'account' : 'main' }]
+
+#====================================================================================================
+# REPLACE THE LINKS ABOVE WITH YOUR OWN SOCIAL MEDIA LINKS
+#====================================================================================================
 
 TOTAL_FOLLOWERS = 0
 
