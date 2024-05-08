@@ -1,0 +1,7 @@
+applescript
+opencv-python
+pillow
+pyautogui
+pytesseract
+tqdm
+numpy
