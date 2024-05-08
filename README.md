@@ -2,7 +2,7 @@
 
 ![HyperHerd](./images/hyperherd.png)
 
-HyperHerd is a Python-based project that automates the process of tracking and aggregating your social media follower counts across multiple platforms. It was developed by Jack as a solution to the tedious task of manually checking and updating their personal website's "live" follower count.
+HyperHerd is a Python-based project that automates the process of tracking and aggregating your social media follower counts across multiple platforms. It was developed by Jack Blair as a solution to the tedious task of manually checking and updating their personal website's "live" follower count.
 
 ## Why HyperHerd?
 
